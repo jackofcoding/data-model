@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{EF8C1399-63C9-4552-A698-17A8F8C39A50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel.Tests", "DataModel.Tests\DataModel.Tests.csproj", "{D80D3887-0750-46E1-8AC0-FC58178BB891}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF8C1399-63C9-4552-A698-17A8F8C39A50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF8C1399-63C9-4552-A698-17A8F8C39A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF8C1399-63C9-4552-A698-17A8F8C39A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF8C1399-63C9-4552-A698-17A8F8C39A50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D80D3887-0750-46E1-8AC0-FC58178BB891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D80D3887-0750-46E1-8AC0-FC58178BB891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D80D3887-0750-46E1-8AC0-FC58178BB891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D80D3887-0750-46E1-8AC0-FC58178BB891}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
