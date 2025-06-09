@@ -48,12 +48,14 @@ public class SetValue
   {
     var model = new DataModel.FlatModel();
 
-    await Assert.ThrowsAsync<ArgumentNullException>(LocalTestFunction);
+    var exception = await Assert.ThrowsAsync<ArgumentException>(LocalTestFunction);
+    await Assert.That(exception.Message).StartsWith("Invalid key format.");
+    await Assert.That(exception.ParamName).IsEqualTo("key");
     return;
 
     Task LocalTestFunction()
     {
-      model.SetValue<string>(null!, "value");
+      model.SetValue(null!, "value");
       return Task.CompletedTask;
     }
   }
@@ -63,12 +65,14 @@ public class SetValue
   {
     var model = new DataModel.FlatModel();
 
-    await Assert.ThrowsAsync<ArgumentNullException>(LocalTestFunction);
+    var exception = await Assert.ThrowsAsync<ArgumentException>(LocalTestFunction);
+    await Assert.That(exception.Message).StartsWith("Invalid key format.");
+    await Assert.That(exception.ParamName).IsEqualTo("key");
     return;
 
     Task LocalTestFunction()
     {
-      model.SetValue<string>(String.Empty, "value");
+      model.SetValue(String.Empty, "value");
       return Task.CompletedTask;
     }
   }
@@ -77,21 +81,47 @@ public class SetValue
   [Arguments(" foo")]
   [Arguments(" foo")]
   [Arguments("\tfoo")]
+  [Arguments("\rfoo")]
   [Arguments("\nfoo")]
   [Arguments("foo ")]
   [Arguments("foo ")]
   [Arguments("foo\t")]
+  [Arguments("foo\r")]
   [Arguments("foo\n")]
-  public async Task SetValue_WithSurroundingWhitespaceKey_ThrowsArgumentException(string key)
+  public async Task SetValue_WithOutsideWhitespaceKey_ThrowsArgumentException(string key)
   {
     var model = new DataModel.FlatModel();
 
-    await Assert.ThrowsAsync<ArgumentException>(LocalTestFunction);
+    var exception = await Assert.ThrowsAsync<ArgumentException>(LocalTestFunction);
+    await Assert.That(exception.Message).StartsWith("Invalid key format.");
+    await Assert.That(exception.ParamName).IsEqualTo("key");
     return;
 
     Task LocalTestFunction()
     {
-      model.SetValue<string>(key, "value");
+      model.SetValue(key, "value");
+      return Task.CompletedTask;
+    }
+  }
+  
+  [Test]
+  [Arguments("foo bar")]
+  [Arguments("foo bar")]
+  [Arguments("foo\tbar")]
+  [Arguments("foo\rbar")]
+  [Arguments("foo\nbar")]
+  public async Task SetValue_WithInsideWhitespaceKey_ThrowsArgumentException(string key)
+  {
+    var model = new DataModel.FlatModel();
+
+    var exception = await Assert.ThrowsAsync<ArgumentException>(LocalTestFunction);
+    await Assert.That(exception.Message).StartsWith("Invalid key format.");
+    await Assert.That(exception.ParamName).IsEqualTo("key");
+    return;
+
+    Task LocalTestFunction()
+    {
+      model.SetValue(key, "value");
       return Task.CompletedTask;
     }
   }
